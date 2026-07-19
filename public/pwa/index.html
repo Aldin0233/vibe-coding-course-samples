@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#22618a">
+  <meta name="description" content="공공 날씨 정보와 개인 일정을 함께 보는 고급 PWA 견본">
+  <title>3안 | 날씨 참고 일정 기록장 PWA</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon-192.png">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./pwa.css">
+</head>
+<body>
+  <header class="app-header">
+    <a class="back-link" href="../" aria-label="세 안 비교로 돌아가기">←</a>
+    <img src="./icons/icon-192.png" width="40" height="40" alt="">
+    <div class="app-title">
+      <span>3안 · 고급 확장형</span>
+      <strong>날씨 참고 일정 기록장 PWA</strong>
+    </div>
+    <button id="install-button" class="install-button" type="button"><span aria-hidden="true">↓</span> 앱 설치</button>
+  </header>
+
+  <main class="weather-layout">
+    <section class="weather-band" aria-labelledby="weather-title">
+      <div class="weather-place">
+        <span class="data-label">오늘의 날씨</span>
+        <h1 id="weather-title">불러오는 중</h1>
+        <p id="weather-time">갱신 시각 확인 중</p>
+      </div>
+      <div class="weather-current" aria-live="polite">
+        <span id="weather-symbol" class="weather-symbol" aria-hidden="true">·</span>
+        <strong id="weather-temperature">--°</strong>
+        <span id="weather-condition">날씨 확인 중</span>
+      </div>
+      <div class="weather-source">
+        <span id="connection-state">온라인</span>
+        <a id="source-link" href="https://www.data.go.kr/data/15084084/openapi.do" target="_blank" rel="noreferrer">출처 확인</a>
+      </div>
+    </section>
+
+    <section class="schedule-workspace">
+      <div class="schedule-form-wrap">
+        <h2>일정 추가</h2>
+        <form id="schedule-form">
+          <label for="schedule-title">일정</label>
+          <input id="schedule-title" name="title" maxlength="60" required placeholder="예: 야외 행사 준비">
+
+          <label for="schedule-date">날짜</label>
+          <input id="schedule-date" name="date" type="date" required>
+
+          <label for="schedule-location">지역</label>
+          <select id="schedule-location" name="location">
+            <option>서울</option>
+            <option>대전</option>
+            <option>부산</option>
+          </select>
+
+          <button type="submit" class="primary-button"><span aria-hidden="true">＋</span> 일정 저장</button>
+        </form>
+      </div>
+
+      <div class="schedule-list-wrap">
+        <div class="schedule-heading">
+          <div>
+            <span class="data-label">나의 일정</span>
+            <h2>예정 일정</h2>
+          </div>
+          <strong id="schedule-count">0건</strong>
+        </div>
+        <ul id="schedule-list" class="schedule-list"></ul>
+        <p id="empty-state" class="empty-state" hidden>등록된 일정이 없습니다.</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js"></script>
+</body>
+</html>

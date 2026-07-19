@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#a64a3b">
+  <title>2안 | 하루 기록 다이어리 웹도구</title>
+  <link rel="stylesheet" href="./app.css">
+</head>
+<body>
+  <header class="app-header">
+    <a class="back-link" href="../" aria-label="세 안 비교로 돌아가기">←</a>
+    <div>
+      <span class="option-kicker">2안 · 중급 활용형</span>
+      <strong>하루 기록 다이어리 웹도구</strong>
+    </div>
+  </header>
+
+  <main class="diary-layout">
+    <section class="write-section" aria-labelledby="write-title">
+      <p class="date-heading" id="date-heading"></p>
+      <h1 id="write-title">오늘의 한 줄</h1>
+      <form id="diary-form">
+        <label for="entry-date">날짜</label>
+        <input id="entry-date" name="date" type="date" required>
+
+        <fieldset>
+          <legend>기분</legend>
+          <div class="mood-picker">
+            <label><input type="radio" name="mood" value="맑음" checked><span><b aria-hidden="true">●</b> 맑음</span></label>
+            <label><input type="radio" name="mood" value="차분"><span><b aria-hidden="true">●</b> 차분</span></label>
+            <label><input type="radio" name="mood" value="분주"><span><b aria-hidden="true">●</b> 분주</span></label>
+            <label><input type="radio" name="mood" value="피곤"><span><b aria-hidden="true">●</b> 피곤</span></label>
+          </div>
+        </fieldset>
+
+        <label for="entry-text">기록</label>
+        <textarea id="entry-text" name="text" rows="6" maxlength="280" required placeholder="오늘의 짧은 기록을 남겨보세요."></textarea>
+        <div class="form-footer">
+          <span id="text-count">0 / 280</span>
+          <button class="save-button" type="submit">기록 저장</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="archive-section" aria-labelledby="archive-title">
+      <div class="archive-heading">
+        <div>
+          <span class="archive-label">나의 기록</span>
+          <h1 id="archive-title">최근 기록</h1>
+        </div>
+        <strong id="entry-count">0개</strong>
+      </div>
+      <div id="entry-list" class="entry-list"></div>
+      <p id="empty-state" class="empty-state" hidden>아직 기록이 없습니다.</p>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js"></script>
+</body>
+</html>

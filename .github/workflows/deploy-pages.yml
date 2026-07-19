@@ -1,0 +1,62 @@
+name: Publish sample site
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 */3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      KMA_API_KEY: ${{ secrets.KMA_API_KEY }}
+      KMA_LOCATION: ${{ vars.KMA_LOCATION }}
+      KMA_NX: ${{ vars.KMA_NX }}
+      KMA_NY: ${{ vars.KMA_NY }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Prepare weather data
+        id: weather
+        shell: bash
+        run: |
+          if [ -n "$KMA_API_KEY" ]; then
+            node scripts/update-weather.mjs
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          elif [ "$GITHUB_EVENT_NAME" = "schedule" ]; then
+            echo "KMA_API_KEY is not configured; keeping the current deployment."
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Using the bundled sample weather JSON."
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Configure GitHub Pages
+        if: steps.weather.outputs.deploy == 'true'
+        uses: actions/configure-pages@v5
+
+      - name: Upload static site
+        if: steps.weather.outputs.deploy == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+      - name: Deploy GitHub Pages
+        if: steps.weather.outputs.deploy == 'true'
+        id: deployment
+        uses: actions/deploy-pages@v4

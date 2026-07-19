@@ -1,0 +1,20 @@
+{
+  "source": {
+    "name": "기상청 단기예보 조회서비스",
+    "url": "https://www.data.go.kr/data/15084084/openapi.do"
+  },
+  "location": {
+    "name": "서울",
+    "nx": 60,
+    "ny": 127
+  },
+  "forecast": {
+    "date": "2026-07-19",
+    "time": "12:00",
+    "temperature": 27,
+    "condition": "구름많음",
+    "precipitationType": "없음"
+  },
+  "updatedAt": "2026-07-18T07:00:00.000Z",
+  "isSample": true
+}
