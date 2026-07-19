@@ -5,9 +5,21 @@ const scheduleCount = document.querySelector("#schedule-count");
 const emptyState = document.querySelector("#empty-state");
 const toast = document.querySelector("#toast");
 const installButton = document.querySelector("#install-button");
+const backLink = document.querySelector(".back-link");
 
 let deferredInstallPrompt = null;
 let schedules = loadSchedules();
+
+function isStandaloneMode() {
+  return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+}
+
+function applyDisplayMode() {
+  const standalone = isStandaloneMode();
+  document.body.classList.toggle("is-standalone-app", standalone);
+  if (backLink) backLink.hidden = standalone;
+  if (installButton) installButton.hidden = standalone || !deferredInstallPrompt;
+}
 
 function localDateString(date = new Date()) {
   const offset = date.getTimezoneOffset() * 60_000;
@@ -145,9 +157,12 @@ scheduleList.addEventListener("click", (event) => {
 });
 
 window.addEventListener("beforeinstallprompt", (event) => {
+  if (isStandaloneMode()) {
+    return;
+  }
   event.preventDefault();
   deferredInstallPrompt = event;
-  installButton.hidden = false;
+  applyDisplayMode();
 });
 
 installButton.addEventListener("click", async () => {
@@ -162,11 +177,11 @@ installButton.addEventListener("click", async () => {
   deferredInstallPrompt.prompt();
   await deferredInstallPrompt.userChoice;
   deferredInstallPrompt = null;
-  installButton.hidden = true;
+  applyDisplayMode();
 });
 
 window.addEventListener("appinstalled", () => {
-  installButton.hidden = true;
+  applyDisplayMode();
   announce("앱 설치가 완료되었습니다.");
 });
 
@@ -180,6 +195,7 @@ if ("serviceWorker" in navigator) {
 }
 
 document.querySelector("#schedule-date").value = localDateString();
+applyDisplayMode();
 updateConnectionState();
 renderSchedules();
 loadWeather();

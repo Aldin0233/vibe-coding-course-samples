@@ -42,6 +42,10 @@ select { font: inherit; letter-spacing: 0; }
 
 .app-header img { border-radius: 8px; }
 
+.is-standalone-app .app-header {
+  grid-template-columns: 40px 1fr;
+}
+
 .back-link {
   width: 40px;
   height: 40px;
@@ -73,6 +77,11 @@ select { font: inherit; letter-spacing: 0; }
 
 .install-button:hover,
 .primary-button:hover { background: var(--blue-dark); }
+
+.is-standalone-app .back-link,
+.is-standalone-app .install-button {
+  display: none;
+}
 
 .weather-layout {
   width: min(1120px, calc(100% - 36px));
@@ -216,6 +225,7 @@ select {
 
 @media (max-width: 760px) {
   .app-header { grid-template-columns: 40px 40px 1fr; }
+  .is-standalone-app .app-header { grid-template-columns: 40px 1fr; }
   .install-button { grid-column: 2 / -1; width: 100%; margin-bottom: 12px; }
   .weather-band { grid-template-columns: 1fr; }
   .weather-current { min-width: 0; }
