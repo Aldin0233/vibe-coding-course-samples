@@ -83,6 +83,17 @@ select { font: inherit; letter-spacing: 0; }
   display: none;
 }
 
+@media (display-mode: standalone) {
+  .app-header {
+    grid-template-columns: 40px 1fr;
+  }
+
+  .back-link,
+  .install-button {
+    display: none;
+  }
+}
+
 .weather-layout {
   width: min(1120px, calc(100% - 36px));
   margin: 34px auto 72px;

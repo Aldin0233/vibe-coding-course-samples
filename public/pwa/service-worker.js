@@ -1,4 +1,4 @@
-const CACHE_VERSION = "weather-schedule-pwa-v2";
+const CACHE_VERSION = "weather-schedule-pwa-v3";
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const DATA_CACHE = `${CACHE_VERSION}-data`;
 const APP_SHELL = [
