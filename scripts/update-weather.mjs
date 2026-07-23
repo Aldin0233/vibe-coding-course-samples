@@ -74,7 +74,26 @@ endpoint.searchParams.set("base_time", baseTime);
 endpoint.searchParams.set("nx", String(NX));
 endpoint.searchParams.set("ny", String(NY));
 
-const response = await fetch(endpoint, { signal: AbortSignal.timeout(20_000) });
+async function fetchWithRetry(url, attempts = 3) {
+  let lastError;
+
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      const response = await fetch(url, { signal: AbortSignal.timeout(20_000) });
+      if (response.ok || response.status < 500 || attempt === attempts) return response;
+      lastError = new Error(`HTTP ${response.status}`);
+    } catch (error) {
+      lastError = error;
+      if (attempt === attempts) throw error;
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, attempt * 1500));
+  }
+
+  throw lastError;
+}
+
+const response = await fetchWithRetry(endpoint);
 if (!response.ok) throw new Error(`기상청 API HTTP 오류: ${response.status}`);
 const payload = await response.json();
 const resultCode = payload?.response?.header?.resultCode;

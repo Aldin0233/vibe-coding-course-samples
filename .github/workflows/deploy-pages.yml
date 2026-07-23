@@ -36,8 +36,15 @@ jobs:
         shell: bash
         run: |
           if [ -n "$KMA_API_KEY" ]; then
-            node scripts/update-weather.mjs
-            echo "deploy=true" >> "$GITHUB_OUTPUT"
+            if node scripts/update-weather.mjs; then
+              echo "deploy=true" >> "$GITHUB_OUTPUT"
+            elif [ "$GITHUB_EVENT_NAME" = "schedule" ]; then
+              echo "::warning::Weather API update failed; keeping the current deployment."
+              echo "deploy=false" >> "$GITHUB_OUTPUT"
+            else
+              echo "::warning::Weather API update failed; deploying with bundled sample data."
+              echo "deploy=true" >> "$GITHUB_OUTPUT"
+            fi
           elif [ "$GITHUB_EVENT_NAME" = "schedule" ]; then
             echo "KMA_API_KEY is not configured; keeping the current deployment."
             echo "deploy=false" >> "$GITHUB_OUTPUT"
