@@ -31,7 +31,7 @@ const officialDocs = {
 
 export const metadata: Metadata = {
   title: 'GitHub 시작 가이드 | 저장소부터 Pages까지',
-  description: '저장소 만들기부터 파일 업로드, 폴더·파일 생성, GitHub Pages 공개까지 화면으로 따라가는 가이드',
+  description: '저장소 만들기부터 파일 다운로드와 여러 파일·폴더 업로드, 폴더·파일 생성, GitHub Pages 공개까지 화면으로 따라가는 가이드',
   openGraph: { title: 'GitHub 시작 가이드', description: '저장소 만들기 · 파일 올리기 · Pages 공개', url: '/github', images: [] },
   twitter: { card: 'summary', title: 'GitHub 시작 가이드', description: '저장소 만들기 · 파일 올리기 · Pages 공개', images: [] },
 };
@@ -207,6 +207,7 @@ export default function Home() {
         <a href="#upload" aria-label="3단계 파일 업로드로 이동"><span>3</span><b>파일 업로드</b></a>
         <a href="#folder-file" aria-label="4단계 폴더와 파일 만들기로 이동"><span>4</span><b>폴더·파일</b></a>
         <a href="#pages" aria-label="5단계 Pages 공개로 이동"><span>5</span><b>Pages 공개</b></a>
+        <a href="#download" aria-label="6단계 파일 다운로드로 이동"><span>6</span><b>다운로드</b></a>
       </nav>
 
       <section className="hero" aria-labelledby="hero-title">
@@ -221,7 +222,7 @@ export default function Home() {
         </div>
         <aside className="journey-card" aria-label="이 가이드의 순서">
           <p>가이드 순서</p>
-          <ol><li><span>1</span> 저장소 만들기</li><li><span>2</span> 파일 업로드</li><li><span>3</span> 폴더와 파일 만들기</li><li><span>4</span> Pages로 공개하기</li></ol>
+          <ol><li><span>1</span> 저장소 만들기</li><li><span>2</span> 파일 업로드</li><li><span>3</span> 폴더와 파일 만들기</li><li><span>4</span> Pages로 공개하기</li><li><span>5</span> 파일·전체 ZIP 다운로드</li></ol>
         </aside>
       </section>
 
@@ -266,6 +267,17 @@ export default function Home() {
           <StepTitle number="02" icon={<Upload size={23} />} eyebrow="파일 업로드" title="파일 유무에 따라 시작 버튼이 다릅니다">저장소에 파일이 없으면 <b>Quick setup</b>에서, 파일이 하나라도 있으면 파일 목록 위 <b>Add file</b>에서 시작합니다.</StepTitle>
           <FileStateUploadSwitcher />
           <p className="common-flow-label">여기서부터 두 화면이 같습니다</p>
+          <div className="instruction-card">
+            <h3>여러 파일과 폴더를 한 번에 드래그하기</h3>
+            <ol className="plain-steps">
+              <li>파일 탐색기에서 프로젝트 폴더를 엽니다. 떨어진 항목은 <b>Ctrl</b>을 누른 채 클릭합니다. Mac에서는 <b>Command</b>를 사용합니다.</li>
+              <li><code>index.html</code>, <code>style.css</code>, <code>images</code> 폴더를 함께 선택해 GitHub 업로드 영역으로 끌어다 놓습니다.</li>
+              <li>목록에서 <code>images/logo.png</code>처럼 폴더 경로가 유지되는지 확인합니다. 하위 폴더에 올릴 때는 GitHub에서 그 폴더를 먼저 여세요.</li>
+              <li>업로드가 끝나면 변경 설명을 적고 브랜치를 확인한 뒤 <b>Commit changes</b>로 저장합니다. 새 브랜치를 선택하면 <b>Propose changes</b>와 Pull request 절차로 이어질 수 있습니다.</li>
+            </ol>
+            <p className="micro-note">저장소 첫 화면에 index.html이 필요하면 프로젝트 폴더 <b>안의 파일과 폴더</b>를 선택하세요. 바깥 폴더 자체를 올리면 폴더가 한 겹 더 생깁니다.</p>
+          </div>
+          <HelpBox><ul><li>폴더 안 파일까지 합쳐 한 번에 100개 이하, 파일당 25 MiB 이하로 선택하세요.</li><li><code>node_modules</code>, <code>.git</code>, 비밀값이 있는 <code>.env</code>는 선택하지 마세요. 웹 업로드에서는 .gitignore만 믿고 전체 폴더를 올리지 않습니다.</li><li>같은 경로의 파일은 변경됩니다. 컴퓨터에서 지운 파일이 GitHub에서도 자동 삭제되지는 않습니다.</li><li>저장 후 폴더를 열어 내부 파일과 변경 내용을 확인하세요.</li></ul></HelpBox>
           <ol className="wide-steps"><li><span>1</span><div><b>파일 선택</b><p>점선 상자에 파일·폴더를 끌어 놓거나 <b>choose your files</b>를 누릅니다.</p></div></li><li><span>2</span><div><b>목록 확인</b><p>파일명이 화면에 나타나고 업로드가 끝날 때까지 기다립니다.</p></div></li><li><span>3</span><div><b>Commit changes</b><p>변경 설명은 예: <code>첫 파일 업로드</code>로 쓰고 초록색 버튼을 누릅니다.</p></div></li></ol>
           <ResultBox><p>저장소 파일 목록에 방금 올린 파일명이 보이면 성공입니다.</p></ResultBox>
           <HelpBox><ul><li>웹 브라우저 업로드는 파일 1개당 25 MiB, 한 번에 최대 100개까지 가능합니다.</li><li>초록색 버튼이 비활성화되어 있으면 업로드가 끝나지 않았거나 같은 이름의 파일이 충돌한 경우입니다.</li><li>직접 커밋할 권한이 없으면 <b>Propose changes</b>가 보일 수 있습니다. 내 저장소인지 확인하세요.</li></ul></HelpBox>
@@ -307,6 +319,24 @@ export default function Home() {
 
       </div>
 
+        <section className="guide-section" id="download">
+          <StepTitle number="05" icon={<ArrowDown size={23} />} eyebrow="내 컴퓨터로 가져오기" title="파일 하나 또는 프로젝트 전체를 내려받으세요">파일 하나만 필요하면 개별 다운로드, VS Code에서 수정하려면 전체 ZIP 다운로드를 선택하세요.</StepTitle>
+          <div className="image-pair">
+            <div className="instruction-card">
+              <span className="instruction-label">파일 하나</span><h3>파일 열기 → Download raw file</h3>
+              <ol className="plain-steps"><li>저장소에서 필요한 파일 이름을 누릅니다.</li><li>파일 내용 위쪽의 다운로드 아이콘 <b>Download raw file</b>을 누릅니다.</li><li>다운로드 폴더에서 파일을 찾아 작업 폴더로 옮깁니다.</li></ol>
+              <p className="micro-note">HTML이 CSS나 JavaScript를 참조하면 해당 파일도 필요합니다. 파일명과 확장자가 유지되었는지 확인하세요.</p>
+            </div>
+            <div className="instruction-card">
+              <span className="instruction-label">프로젝트 전체</span><h3>Code → Download ZIP</h3>
+              <ol className="plain-steps"><li>저장소 첫 화면에서 수업용 브랜치를 선택합니다.</li><li>파일 목록 위 <b>Code → Download ZIP</b>을 누릅니다.</li><li>ZIP을 우클릭해 <b>모두 압축 풀기</b>를 선택합니다. Mac은 ZIP을 더블클릭합니다.</li><li>VS Code의 <b>파일 → 폴더 열기</b>에서 압축을 푼 프로젝트 폴더를 엽니다.</li></ol>
+              <p className="micro-note">기본 HTML 프로젝트는 index.html, Vite 프로젝트는 package.json이 있는 폴더를 엽니다.</p>
+            </div>
+          </div>
+          <ResultBox><p>VS Code 탐색기에 프로젝트 파일과 하위 폴더가 보이면 준비 완료입니다. 수정한 파일은 <a href="#upload">업로드 안내</a>로 다시 올릴 수 있습니다.</p></ResultBox>
+          <HelpBox><ul><li>ZIP 안에서 바로 수정하지 말고 압축을 먼저 푸세요.</li><li>ZIP은 선택한 시점의 복사본입니다. GitHub와 자동 연결되지 않으며 커밋 이력도 포함하지 않습니다.</li><li>빈 저장소에는 내려받을 파일이 없습니다. 파일을 먼저 커밋하세요.</li><li>폴더 열기는 <a href={withBasePath('/vscode')}>VS Code 가이드</a>에서 자세히 확인하세요.</li></ul></HelpBox>
+          <a className="docs-link" href="https://docs.github.com/en/repositories/working-with-files/using-files/downloading-source-code-archives" target="_blank" rel="noreferrer">GitHub 다운로드 공식 문서 <ExternalLink size={15} aria-hidden="true" /></a>
+        </section>
       <footer><p>GitHub UI 명칭은 GitHub 공식 문서를 기준으로 확인했습니다.</p><p>개인 계정명·이메일·인증 정보는 예시 화면에 포함하지 않았습니다.</p></footer>
     </main>
   );

@@ -361,7 +361,7 @@ footer p { margin: 0; }
   .vscode-ready-card { max-width: 560px; }
   .hero { grid-template-columns: 1fr; gap: 38px; } .journey-card { max-width: 520px; }
   .settings-list, .wide-steps, .file-state-choice { grid-template-columns: 1fr; }
-  .guide-remote { top: auto; right: auto; bottom: 10px; left: 50%; grid-template-columns: repeat(5,1fr); gap: 5px; width: min(94vw,520px); padding: 6px; transform: translateX(-50%); }
+  .guide-remote { top: auto; right: auto; bottom: 10px; left: 50%; grid-template-columns: repeat(6,1fr); gap: 5px; width: min(94vw,520px); padding: 6px; transform: translateX(-50%); }
   .guide-remote a { flex-direction: column; gap: 3px; min-width: 0; min-height: 48px; padding: 4px 2px; }
   .guide-remote a span { width: 22px; height: 22px; font-size: 10px; }
   .guide-remote a b { width: 100%; text-align: center; font-size: 9px; }
