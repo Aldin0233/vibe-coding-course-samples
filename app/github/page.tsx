@@ -1,9 +1,10 @@
+import { GuideHeader, GuideFooter } from '@/components/guide-chrome';
 import {
+  CheckCircle2,
+  BookOpen,
   AlertTriangle,
   ArrowDown,
   ArrowRight,
-  BookOpen,
-  CheckCircle2,
   ExternalLink,
   FilePlus2,
   FolderPlus,
@@ -194,23 +195,9 @@ export default function Home() {
     <main id="top">
       <a className="skip-link" href="#guide">본문 바로가기</a>
 
-      <header className="site-header">
-        <a className="brand" href="#top" aria-label="GitHub 시작 가이드 처음으로">
-          <span className="brand-mark"><GitFork size={20} aria-hidden="true" /></span><span>GitHub 시작 가이드</span>
-        </a>
-        <nav className="header-nav" aria-label="주요 이동"><a href={withBasePath('/')}>가이드 선택</a><a href="#guide">가이드 보기</a><a href="#pages">Pages 배포</a></nav>
-      </header>
+      <GuideHeader title="GitHub" />
 
-      <nav className="guide-remote" aria-label="가이드 단계 바로가기">
-        <a href="#start-screen-chooser" aria-label="1단계 저장소 생성 버튼 찾기로 이동"><span>1</span><b>생성 버튼 찾기</b></a>
-        <a href="#repository-settings" aria-label="2단계 저장소 만들기로 이동"><span>2</span><b>저장소 만들기</b></a>
-        <a href="#upload" aria-label="3단계 파일 업로드로 이동"><span>3</span><b>파일 업로드</b></a>
-        <a href="#folder-file" aria-label="4단계 폴더와 파일 만들기로 이동"><span>4</span><b>폴더·파일</b></a>
-        <a href="#pages" aria-label="5단계 Pages 공개로 이동"><span>5</span><b>Pages 공개</b></a>
-        <a href="#download" aria-label="6단계 파일 다운로드로 이동"><span>6</span><b>다운로드</b></a>
-      </nav>
-
-      <section className="hero" aria-labelledby="hero-title">
+<section className="hero" aria-labelledby="hero-title">
         <div className="hero-copy-wrap">
           <div className="eyebrow"><BookOpen size={15} aria-hidden="true" /> 비개발자를 위한 화면 따라하기</div>
           <h1 id="hero-title">파일 한 장에서<br /><span>웹 주소 하나까지.</span></h1>
@@ -267,6 +254,7 @@ export default function Home() {
           <StepTitle number="02" icon={<Upload size={23} />} eyebrow="파일 업로드" title="파일 유무에 따라 시작 버튼이 다릅니다">저장소에 파일이 없으면 <b>Quick setup</b>에서, 파일이 하나라도 있으면 파일 목록 위 <b>Add file</b>에서 시작합니다.</StepTitle>
           <FileStateUploadSwitcher />
           <p className="common-flow-label">여기서부터 두 화면이 같습니다</p>
+          <figure className="official-shot wide-shot github-file-demo"><ZoomImage src="/github-upload-demo.gif" alt="GitHub에서 Add file 메뉴를 열어 파일을 업로드하고 저장하는 과정" width={1728} height={972} /><figcaption>업로드 과정 예시입니다. 파일을 올린 뒤 아래쪽 <b>Commit changes</b>로 저장하세요. <a href="https://github.blog/developer-skills/github/beginners-guide-to-github-uploading-files-and-folders-to-github/" target="_blank" rel="noreferrer">이미지 출처: GitHub</a></figcaption></figure>
           <div className="instruction-card">
             <h3>여러 파일과 폴더를 한 번에 드래그하기</h3>
             <ol className="plain-steps">
@@ -302,7 +290,7 @@ export default function Home() {
         </section>
 
         <section className="guide-section pages-section" id="pages">
-          <StepTitle number="04" icon={<Settings size={23} />} eyebrow="정적 페이지 배포" title="Settings에서 Pages를 켜세요">저장소에 <code>index.html</code>이 있어야 첫 화면이 열립니다. 준비됐다면 아래 경로를 순서대로 선택하세요.</StepTitle>
+          <StepTitle number="04" icon={<Settings size={23} />} eyebrow="정적 페이지 배포" title="Settings에서 Pages를 켜세요">이 단계는 기본 HTML 프로젝트를 GitHub Pages로 배포할 때만 사용합니다. Vite·Supabase 수업은 <a href={withBasePath("/vercel")}>Vercel 가이드</a>로 진행하세요.</StepTitle>
           <div className="pages-path" aria-label="GitHub Pages 설정 경로"><span>Settings</span><ArrowRight size={17} aria-hidden="true" /><span>Pages</span><ArrowRight size={17} aria-hidden="true" /><span>Deploy from a branch</span><ArrowRight size={17} aria-hidden="true" /><span>main</span><ArrowRight size={17} aria-hidden="true" /><span>/(root)</span><ArrowRight size={17} aria-hidden="true" /><span>Save</span></div>
           <div className="pages-grid">
             <figure className="official-shot"><ZoomImage src="/pages-settings.png" alt="저장소 탭 중 Settings가 강조된 화면" width={2196} height={216} focus="right" /><figcaption><span>1</span> 저장소 위쪽 <b>Settings</b></figcaption></figure>
@@ -333,11 +321,15 @@ export default function Home() {
               <p className="micro-note">기본 HTML 프로젝트는 index.html, Vite 프로젝트는 package.json이 있는 폴더를 엽니다.</p>
             </div>
           </div>
+                    <div className="image-pair github-download-images">
+            <figure className="official-shot github-file-demo"><ZoomImage src="/github-download-zip.png" alt="저장소 파일 목록 위 Code 버튼 위치" width={1078} height={582} /><figcaption><b>1. Code</b> — 저장소 첫 화면에서 초록색 버튼을 누르세요. <a href="https://docs.github.com/en/repositories/working-with-files/using-files/downloading-source-code-archives" target="_blank" rel="noreferrer">이미지 출처: GitHub</a></figcaption></figure>
+            <figure className="official-shot github-file-demo"><ZoomImage src="/github-zip-menu.webp" alt="Code 메뉴 아래 Download ZIP 항목을 화살표로 가리킨 화면" width={786} height={534} /><figcaption><b>2. Download ZIP</b> — 열린 메뉴 아래에서 선택하세요. 이미지와 메뉴 모양이 조금 달라도 같은 이름을 찾으면 됩니다. <a href="https://blog.hubspot.com/website/download-from-github" target="_blank" rel="noreferrer">이미지 출처: HubSpot</a></figcaption></figure>
+          </div>
           <ResultBox><p>VS Code 탐색기에 프로젝트 파일과 하위 폴더가 보이면 준비 완료입니다. 수정한 파일은 <a href="#upload">업로드 안내</a>로 다시 올릴 수 있습니다.</p></ResultBox>
           <HelpBox><ul><li>ZIP 안에서 바로 수정하지 말고 압축을 먼저 푸세요.</li><li>ZIP은 선택한 시점의 복사본입니다. GitHub와 자동 연결되지 않으며 커밋 이력도 포함하지 않습니다.</li><li>빈 저장소에는 내려받을 파일이 없습니다. 파일을 먼저 커밋하세요.</li><li>폴더 열기는 <a href={withBasePath('/vscode')}>VS Code 가이드</a>에서 자세히 확인하세요.</li></ul></HelpBox>
           <a className="docs-link" href="https://docs.github.com/en/repositories/working-with-files/using-files/downloading-source-code-archives" target="_blank" rel="noreferrer">GitHub 다운로드 공식 문서 <ExternalLink size={15} aria-hidden="true" /></a>
         </section>
-      <footer><p>GitHub UI 명칭은 GitHub 공식 문서를 기준으로 확인했습니다.</p><p>개인 계정명·이메일·인증 정보는 예시 화면에 포함하지 않았습니다.</p></footer>
+      <GuideFooter />
     </main>
   );
 }

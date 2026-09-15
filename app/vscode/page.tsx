@@ -1,18 +1,17 @@
+import { GuideHeader, GuideFooter } from '@/components/guide-chrome';
 import type { Metadata } from 'next';
 import {
+  Code2,
+  ArrowDown,
+  CheckCircle2,
   AlertTriangle,
   Apple,
-  ArrowDown,
-  ArrowLeft,
-  CheckCircle2,
-  Code2,
   Command,
   Download,
   ExternalLink,
   FilePlus2,
   FolderOpen,
   FolderPlus,
-  GitFork,
   Monitor,
   MousePointerClick,
   Radio,
@@ -73,23 +72,9 @@ export default function VsCodeGuide() {
     <main className="vscode-page vscode-guide-page" id="vscode-top">
       <a className="skip-link" href="#vscode-guide">본문 바로가기</a>
 
-      <header className="site-header">
-        <a className="brand" href="#vscode-top" aria-label="VS Code 시작 가이드 처음으로">
-          <span className="brand-mark vscode-brand-mark"><Code2 size={20} aria-hidden="true" /></span>
-          <span>VS Code 시작 가이드</span>
-        </a>
-        <nav className="header-nav" aria-label="다른 가이드 이동"><a href={withBasePath('/')}>가이드 선택</a><a href={withBasePath('/github/')}>GitHub 가이드</a></nav>
-      </header>
+      <GuideHeader title="VS Code" />
 
-      <nav className="guide-remote vscode-remote" aria-label="VS Code 가이드 단계 바로가기">
-        <a href="#vscode-install"><span>1</span><b>설치</b></a>
-        <a href="#vscode-open-folder"><span>2</span><b>폴더 열기</b></a>
-        <a href="#vscode-live-server"><span>3</span><b>Live Server</b></a>
-        <a href="#vscode-trust"><span>4</span><b>제한 해제</b></a>
-        <a href="#vscode-create"><span>5</span><b>파일·폴더</b></a>
-      </nav>
-
-      <section className="vscode-guide-hero" aria-labelledby="vscode-title">
+<section className="vscode-guide-hero" aria-labelledby="vscode-title">
         <div>
           <p className="vscode-eyebrow"><Code2 size={16} aria-hidden="true" /> 화면으로 따라가는 VS CODE</p>
           <h1 id="vscode-title">폴더를 열고,<br /><span>웹 화면을 띄우기까지.</span></h1>
@@ -184,7 +169,7 @@ export default function VsCodeGuide() {
         </section>
 
         <section className="vs-guide-section" id="vscode-live-server">
-          <VsStepTitle number="03" icon={<Radio size={23} />} eyebrow="웹 화면 실행" title="Live Server를 설치하고 실행하세요">확장 프로그램의 정확한 이름과 게시자를 확인한 뒤, HTML 파일에서 서버를 시작합니다.</VsStepTitle>
+          <VsStepTitle number="03" icon={<Radio size={23} />} eyebrow="웹 화면 실행" title="Live Server를 설치하고 실행하세요">Vite로 변경하기 전의 기본 HTML 프로젝트용입니다. 확장 프로그램을 설치한 뒤 HTML 파일을 엽니다. Vite로 변경한 프로젝트는 Vercel 배포 주소에서 확인합니다.</VsStepTitle>
           <div className="vs-extensions-guide">
             <VsImage src="/vscode-extensions-view.png" alt="VS Code 왼쪽 Extensions 아이콘을 열고 Live Server를 검색한 실제 화면" width={584} height={408} target={["vs-extensions-target", "vs-live-server-result-target"]} caption={<><MousePointerClick size={16} /> 왼쪽 <b>네모 4개 모양 Extensions</b> → <b>live server</b> 검색 → 첫 번째 <b>Live Server · Ritwick Dey</b>를 선택하세요. <b>Install</b>이 보이면 누르고, 톱니바퀴가 보이면 이미 설치된 상태입니다.</>} />
           </div>
@@ -237,7 +222,7 @@ export default function VsCodeGuide() {
         </section>
       </div>
 
-      <footer><p>VS Code · Windows · macOS 화면 기준 가이드</p><p><a href={withBasePath('/')}>다른 가이드 선택</a> · <a href={withBasePath('/github/')}>GitHub 가이드</a></p></footer>
+      <GuideFooter />
     </main>
   );
 }
