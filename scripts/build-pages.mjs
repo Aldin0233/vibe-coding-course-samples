@@ -1,5 +1,5 @@
 import { spawnSync } from 'node:child_process';
-import { existsSync, renameSync, rmSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readdirSync, renameSync, rmSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 const cliPath = fileURLToPath(new URL('../node_modules/vinext/dist/cli.js', import.meta.url));
@@ -37,4 +37,13 @@ if (existsSync(nestedAssetDirectory)) {
 
 if (!existsSync(pagesAssetDirectory)) {
   throw new Error(`GitHub Pages assets were not generated under ${outputRoot}`);
+}
+
+// GitHub Pages serves /guide/ from /guide/index.html; keep .html links working too.
+for (const entry of readdirSync(outputRoot)) {
+  if (!entry.endsWith('.html') || entry === 'index.html' || entry === '404.html') continue;
+  const route = entry.slice(0, -5);
+  const directory = new URL(`../dist/client/${route}/`, import.meta.url);
+  mkdirSync(directory, { recursive: true });
+  copyFileSync(new URL(`../dist/client/${entry}`, import.meta.url), new URL('index.html', directory));
 }
