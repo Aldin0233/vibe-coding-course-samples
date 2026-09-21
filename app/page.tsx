@@ -50,6 +50,7 @@ export default function GuidePicker() {
           ))}
         </div>
       </section>
+      <aside className="home-contact"><h2>궁금한 점이 있으신가요?</h2><p>수업이나 가이드에 관한 질문을 이메일로 보내주세요.</p><a href="mailto:changhyunlee96@gmail.com">changhyunlee96@gmail.com ↗</a></aside>
       <GuideFooter />
     </main>
   );

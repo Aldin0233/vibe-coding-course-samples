@@ -1,6 +1,7 @@
 import type { GuideData } from '@/components/course-guide';
 const guide: GuideData = {
   "title": "바이브 코딩",
+  "preface": true,
   "intro": "기획문서와 필요한 코드 내용을 채팅에 붙여 넣어 요청합니다. GPT의 파일 생성·첨부 기능 없이도 따라갈 수 있도록, 답변을 내가 복사해 파일에 반영하는 방식으로 진행합니다.",
   "next": "supabase",
   "nextLabel": "다음: Supabase 연결하기",

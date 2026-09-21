@@ -1,10 +1,11 @@
+import VibePreface from './vibe-preface';
 import { GuideHeader, GuideFooter } from './guide-chrome';
 import { BookOpen, CheckCircle2, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { withBasePath } from '@/lib/base-path';
 type GuideImage = { src: string; alt: string; caption: string; source: string; width: number; height: number };
-export type GuideData = { title: string; intro: string; next: string; nextLabel: string; steps: { title: string; body: string[]; code?: string; codeLabel?: string; image?: GuideImage; image2?: GuideImage; images?: GuideImage[]; table?: string[][]; result: string }[]; sources: string[][] };
+export type GuideData = { title: string; intro: string; preface?: boolean; next: string; nextLabel: string; steps: { title: string; body: string[]; code?: string; codeLabel?: string; image?: GuideImage; image2?: GuideImage; images?: GuideImage[]; table?: string[][]; result: string }[]; sources: string[][] };
 function GuidePicture({ picture }: { picture: GuideImage }) {
   return <figure className="course-shot"><a href={withBasePath(picture.src)} target="_blank" rel="noreferrer" aria-label={`${picture.alt} 크게 보기`}><Image src={withBasePath(picture.src)} alt={picture.alt} width={picture.width} height={picture.height} unoptimized /><span className="zoom-hint">크게 보기 <ExternalLink size={14} aria-hidden="true" /></span></a><figcaption>{picture.caption} <a href={picture.source} target="_blank" rel="noreferrer">이미지 출처</a></figcaption></figure>;
 }
@@ -12,6 +13,7 @@ export default function CourseGuide({ guide }: { guide: GuideData }) {
   return <main className="course-guide">
     <GuideHeader title={guide.title} />
     <section className="course-hero"><p className="picker-eyebrow"><BookOpen size={18} aria-hidden="true" /> 바이브 코딩 가이드</p><h1>{guide.title}</h1><p>{guide.intro}</p>
+      {guide.preface ? <VibePreface /> : null}
       <nav className="course-toc" aria-label="이 페이지 목차">{guide.steps.map((step, index) => <a key={step.title} href={`#step-${index + 1}`}><span>{String(index + 1).padStart(2, '0')}</span>{step.title}</a>)}</nav>
     </section>
     <div className="course-body">{guide.steps.map((step, index) => <section className="course-step" id={`step-${index + 1}`} key={step.title}>
